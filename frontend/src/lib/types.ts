@@ -75,3 +75,33 @@ export function formatDate(dateStr: string | null): string {
     day: 'numeric',
   });
 }
+
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => RazorpayInstance;
+  }
+}
+
+export interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  order_id: string;
+  handler: (response: RazorpayResponse) => void;
+  modal?: {
+    ondismiss?: () => void;
+  };
+  theme?: {
+    color?: string;
+  };
+}
+
+export interface RazorpayInstance {
+  open: () => void;
+}
+
+export interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}

@@ -1,22 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import * as razorpayService from '../services/razorpay.service';
-import * as subscriptionService from '../services/subscription.service';
+import * as subscriptionService from '../services/subscription';
 import { WebhookEvent } from '../models/webhookEvent.model';
 import { webhookPayloadSchema } from '../validators/subscription.validator';
 import { logger } from '../utils/logger';
 import { ApiResponse } from '../types';
 
-/**
- * POST /api/webhooks/razorpay
- *
- * Processes Razorpay webhook events. Flow:
- * 1. Verify x-razorpay-signature using raw body (Edge #7)
- * 2. Validate payload shape with Zod (Edge #16)
- * 3. Check WebhookEvent for x-razorpay-event-id idempotency (Edge #3)
- * 4. Insert WebhookEvent record
- * 5. Route to payment.captured or payment.failed handler
- * 6. Return 200
- */
+// POST /api/webhooks/razorpay
 export async function handleWebhook(
   req: Request,
   res: Response,

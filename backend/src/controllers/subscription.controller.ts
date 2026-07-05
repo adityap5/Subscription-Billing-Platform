@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import * as subscriptionService from '../services/subscription.service';
+import * as subscriptionService from '../services/subscription';
 import { ApiResponse } from '../types';
 
 //POST /api/subscriptions- Creates a new subscription + Razorpay order

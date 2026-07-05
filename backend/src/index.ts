@@ -3,7 +3,7 @@ import { connectDB } from './config/db';
 import { createApp } from './app';
 import { logger } from './utils/logger';
 import cron from 'node-cron';
-import { processScheduledTransitions } from './services/subscription.service';
+import { processScheduledTransitions } from './services/subscription';
 async function main(): Promise<void> {
   const env = loadEnv();
   logger.info('Environment validated');

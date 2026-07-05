@@ -1,6 +1,6 @@
 import { connectDB, disconnectDB } from '../config/db';
 import { loadEnv } from '../config/env';
-import { processScheduledTransitions } from '../services/subscription.service';
+import { processScheduledTransitions } from '../services/subscription';
 import { logger } from '../utils/logger';
 
 async function runBatchJob() {
