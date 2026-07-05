@@ -1,5 +1,8 @@
 # Subscription Billing Platform
 
+## Demo / Walkthrough
+[Watch the Demo Walkthrough Video](https://drive.google.com/file/d/19wfx9FeeIQJo_Y3NHqJgTg8ZgrIMY-lO/view?usp=sharing)
+
 A production-grade subscription billing platform built with Express.js (backend) and Next.js 15 (frontend), using Razorpay Orders API for payments, MongoDB for persistence, and Resend for email notifications.
 
 ## Architecture
