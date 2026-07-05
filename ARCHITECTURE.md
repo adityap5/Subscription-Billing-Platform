@@ -65,6 +65,10 @@ Always positive for upgrades (caller validates). Rounding down slightly favors t
 **Choice:** Dropped `razorpayOrderId` from the Subscription model entirely. Payment is the source of truth — query Payment collection for order lookups.
 **Rationale:** A single `razorpayOrderId` field on Subscription gets overwritten when an upgrade creates a second Razorpay Order for the same active subscription, which breaks the duplicate-pending-order guard. Payment already stores `razorpayOrderId` per record with full history. Querying `Payment.findOne({ subscriptionId, status: 'created' })` replaces every use case the field served, without the data-loss risk of a convenience pointer.
 
+### 12. Background Jobs (Cron)
+**Choice:** In-process scheduling via `node-cron` running hourly.
+**Rationale:** For the scope of this assignment, an in-process cron is simpler and sufficient to execute `processScheduledTransitions()`. In a real production environment, this would more likely be triggered by an external system cron, a scheduled Lambda/cloud function, or an external task orchestrator hitting a secured internal endpoint, to ensure high availability and avoid duplicate executions when running multiple server instances.
+
 ---
 
 ## Data Model

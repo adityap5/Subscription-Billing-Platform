@@ -116,6 +116,14 @@ export function SubscriptionStatusCard({
             </p>
           </div>
         )}
+
+        {subscription.status === 'expired' && (
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+            <p className="text-sm text-gray-600">
+              Your subscription has expired. Please subscribe to a new plan to regain access.
+            </p>
+          </div>
+        )}
       </CardBody>
     </Card>
   );

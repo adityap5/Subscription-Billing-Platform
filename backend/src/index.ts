@@ -2,7 +2,8 @@ import { loadEnv } from './config/env';
 import { connectDB } from './config/db';
 import { createApp } from './app';
 import { logger } from './utils/logger';
-
+import cron from 'node-cron';
+import { processScheduledTransitions } from './services/subscription.service';
 async function main(): Promise<void> {
   const env = loadEnv();
   logger.info('Environment validated');
@@ -17,6 +18,17 @@ async function main(): Promise<void> {
       port,
       frontendUrl: env.FRONTEND_URL,
       environment: process.env.NODE_ENV || 'development',
+    });
+
+    // Schedule background job for subscription transitions (runs every hour)
+    cron.schedule('0 * * * *', async () => {
+      logger.info('Running scheduled job: processScheduledTransitions');
+      try {
+        const results = await processScheduledTransitions();
+        logger.info('Scheduled job processScheduledTransitions completed', results);
+      } catch (error) {
+        logger.error('Scheduled job processScheduledTransitions failed', { error });
+      }
     });
   });
 }

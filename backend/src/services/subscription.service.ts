@@ -718,6 +718,7 @@ export async function getCurrentSubscription(
         SubscriptionStatus.ACTIVE,
         SubscriptionStatus.CANCELED,
         SubscriptionStatus.PENDING,
+        SubscriptionStatus.EXPIRED,
       ],
     },
   })
