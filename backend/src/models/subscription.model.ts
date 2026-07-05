@@ -9,9 +9,7 @@ export interface ISubscription extends Document {
   currentPeriodStart: Date | null;
   currentPeriodEnd: Date | null;
   cancelAtPeriodEnd: boolean;
-  /** Scheduled downgrade: the plan to switch to at period end */
   pendingPlanId: mongoose.Types.ObjectId | null;
-  /** When the pending plan change takes effect (set to currentPeriodEnd) */
   pendingPlanEffectiveAt: Date | null;
   createdAt: Date;
   updatedAt: Date;

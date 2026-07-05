@@ -10,10 +10,6 @@ export interface IPayment extends Document {
   amountInPaise: number;
   status: PaymentStatus;
   type: PaymentType;
-  /**
-   * For upgrade payments: the plan being upgraded TO.
-   * Stored at payment creation so the webhook handler knows which plan to apply.
-   */
   targetPlanId: mongoose.Types.ObjectId | null;
   createdAt: Date;
   updatedAt: Date;

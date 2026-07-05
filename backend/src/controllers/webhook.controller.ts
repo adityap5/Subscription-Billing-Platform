@@ -12,11 +12,6 @@ export async function handleWebhook(
   res: Response,
   _next: NextFunction
 ): Promise<void> {
-  // TEMP — remove after capturing a sample payload for replay testing
-  console.log('RAW BODY:', req.rawBody?.toString());
-  console.log('SIGNATURE:', req.headers['x-razorpay-signature']);
-  console.log('EVENT ID:', req.headers['x-razorpay-event-id']);
-
   // Step 1: Verify webhook signature (Edge #7)
   const signature = req.headers['x-razorpay-signature'] as string;
   if (!signature) {
