@@ -6,7 +6,7 @@ import { Payment } from '../src/models/payment.model';
 import { Invoice } from '../src/models/invoice.model';
 import { Plan } from '../src/models/plan.model';
 import { User } from '../src/models/user.model';
-import * as subscriptionService from '../src/services/subscription.service';
+import * as subscriptionService from '../src/services/subscription';
 import { SubscriptionStatus, PaymentStatus, PaymentType } from '../src/types';
 
 /**
