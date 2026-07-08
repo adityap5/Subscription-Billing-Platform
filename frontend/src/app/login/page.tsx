@@ -29,8 +29,6 @@ export default function LoginPage() {
     }
   }, [isAuthenticated, isLoading, router]);
 
-  if (isLoading || isAuthenticated) return null;
-
   const {
     register,
     handleSubmit,
@@ -38,6 +36,8 @@ export default function LoginPage() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
+
+  if (isLoading || isAuthenticated) return null;
 
   const onSubmit = async (data: LoginFormData) => {
     try {

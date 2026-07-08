@@ -30,8 +30,6 @@ export default function RegisterPage() {
     }
   }, [isAuthenticated, isLoading, router]);
 
-  if (isLoading || isAuthenticated) return null;
-
   const {
     register,
     handleSubmit,
@@ -39,6 +37,8 @@ export default function RegisterPage() {
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
+
+  if (isLoading || isAuthenticated) return null;
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
