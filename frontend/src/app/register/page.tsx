@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
+import CryptoJS from 'crypto-js';
 import { useAuth } from '@/hooks/useAuth';
 import { Card, CardBody } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -43,7 +44,8 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       setError(null);
-      await registerUser(data.email, data.password, data.name);
+      const encryptedPassword = CryptoJS.SHA256(data.password).toString();
+      await registerUser(data.email, encryptedPassword, data.name);
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed. Please try again.');

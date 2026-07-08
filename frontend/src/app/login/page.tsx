@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
+import CryptoJS from 'crypto-js';
 import { useAuth } from '@/hooks/useAuth';
 import { Card, CardHeader, CardBody } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -42,7 +43,8 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginFormData) => {
     try {
       setError(null);
-      await login(data.email, data.password);
+      const encryptedPassword = CryptoJS.SHA256(data.password).toString();
+      await login(data.email, encryptedPassword);
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
